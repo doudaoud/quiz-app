@@ -1,7 +1,7 @@
 import React from "react";
 import TextType from "./TypeText/TypeText";
 import "./App.css";
-export default function App() {
+export default function App():React.ReactElement {
   return (
     <React.Fragment>
       <div className="container">
