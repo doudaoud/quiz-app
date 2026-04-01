@@ -1,28 +1,28 @@
 import React from "react";
 import TextType from "./TypeText/TypeText";
-
+import "./App.css";
 export default function App() {
   return (
     <React.Fragment>
       <div className="container">
-        <h1>Quiz Master</h1>
-        <p>
+        <h1 className="title" >Quiz Master</h1>
+        <p className="description">
           Testez vos connaissances générales avec notre quiz interactif. Vous
           aurez 60 secondes pour répondre à 10 questions.
         </p>
-        <div>
-          <div>
+        <div  className="information-quiz">
+          <div className="titles">
             <p>Nombre de questions</p>
             <p>Temps limite</p>
             <p>Format</p>
           </div>
-          <div>
-            <p>10</p>
+          <div className="infos">
+            <p className="hello">10</p>
             <p>60 secondes</p>
             <p>Choix multiple</p>
           </div>
         </div>
-        <button>
+        <button className="commancer-quiz">
           {" "}
           <p>
             {/* Commencer le quiz */}
