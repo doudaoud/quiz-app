@@ -67,8 +67,41 @@
   background-color: rgb(96, 88, 231);
   transform: scale(1.02);
 }
-.instruction{
+.instruction {
   color: rgb(113, 113, 123);
   text-align: center;
   margin-top: 30px;
+}
+.container_quiz {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
+  margin: auto;
+}
+.progress {
+  width: 100%;
+  height: 6px;
+  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: rgb(79, 70, 229);
+}
+
+.qq {
+  width: 100%;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgb(79, 70, 229); /* couleur de la barre (track) */
+  border-radius: 5px;
+  outline: none;
+}
+.cadre_quiz {
 }
