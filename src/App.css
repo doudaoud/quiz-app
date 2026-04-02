@@ -67,3 +67,8 @@
   background-color: rgb(96, 88, 231);
   transform: scale(1.02);
 }
+.instruction{
+  color: rgb(113, 113, 123);
+  text-align: center;
+  margin-top: 30px;
+}

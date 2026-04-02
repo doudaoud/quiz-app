@@ -29,7 +29,11 @@ export default function Home() {
           <p>Choix multiple</p>
         </div>
       </div>
-      <button className="commancer-quiz" onClick={handleButtonClick} title="Commencer le quiz">
+      <button
+        className="commancer-quiz"
+        onClick={handleButtonClick}
+        title="Commencer le quiz"
+      >
         <p>
           <TextType
             text={[
@@ -49,6 +53,10 @@ export default function Home() {
           />
         </p>
       </button>
+      <p className="instruction">
+        Cliquez sur "Commencer" pour démarrer. Vous pouvez rejouer autant de
+        fois que vous le souhaitez.
+      </p>
     </div>
   );
 }
