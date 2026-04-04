@@ -1,13 +1,32 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function Quiz() {
-  const [time, setTime] = React.useState<string | null>();
+  const [time, setTime] = React.useState<number>(60);
   const [value, setValue] = React.useState<number>(100);
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (time > 0) {
+        setTime(time - 1);
+      } else {
+        // alert("Temps écoulé !");
+        // window.location.reload();
+         clearInterval(interval);
+         navigate("/result");
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [time]);
   return (
     <React.Fragment>
       <div className="container_quiz">
-        <h3>Time left:</h3>
-        <div className="progress">
+        <h3>{(time === 60) ? "1:00" :`00:${time}` }</h3>
+        <div
+          onClick={() => {
+            setValue(value - 1);
+          }}
+          className="progress"
+        >
           <div className="progress-fill" style={{ width: `${value}%` }} />
         </div>
         <p className="temps_restant">Temps restant</p>
@@ -60,9 +79,9 @@ export default function Quiz() {
               />
               <span>question 1 </span>
             </label>
-          
-            <button className="suivant" disabled >Suivant</button>
-         
+            <button className="suivant" disabled>
+              Suivant
+            </button>
           </div>
         </div>
       </div>
