@@ -20,7 +20,7 @@ export default function Quiz() {
           <h2 className="qustion">
             Quel est le plus grand océan du monde ?
           </h2>
-          <p>
+          <p className="num_question">
             Question 1 sur 10
           </p>
           <div className="reponses">
