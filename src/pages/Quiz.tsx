@@ -59,6 +59,9 @@ export default function Quiz() {
   const [time, setTime] = React.useState<number>(60);
   const [value, setValue] = React.useState<number>(100);
   const [progression, setProgression] = React.useState<number>(10);
+  const radioRef = React.useRef<HTMLInputElement>(null);
+  const [response , setResponse ] = React.useState<object>([])
+
   const navigate = useNavigate();
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -72,7 +75,7 @@ export default function Quiz() {
         clearInterval(interval);
         navigate("/result");
       }
-      
+
     }, 1000);
     return () => clearInterval(interval);
   }, [time]);
