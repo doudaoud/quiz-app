@@ -12,7 +12,6 @@
   font-size: 2.8rem;
   font-weight: 900;
   font-family: sans-serif;
-
 }
 .description {
   color: rgb(113, 113, 123);
@@ -22,7 +21,6 @@
   font-size: 19px;
   text-align: center;
   line-height: 30px;
-
 }
 .information-quiz {
   display: flex;
@@ -76,9 +74,7 @@
   display: flex;
   flex-flow: column nowrap;
   width: 60%;
-  /* justify-content: center; */
   align-items: center;
-  /* background-color: antiquewhite; */
   height: 95vh;
   margin: auto;
 }
@@ -94,7 +90,7 @@
   height: 97%;
   background: rgb(79, 70, 229);
   border-radius: 5px;
-  transition: width 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .temps_restant {
   color: rgb(117, 117, 144);
@@ -114,7 +110,10 @@
   font-weight: bold;
   /* font-size: 18px; */
   margin-bottom: 5px;
-  margin-right: 733px;
+  margin-right: 700px;
+  /* padding-right: 10px; */
+  width: 150px;
+  /* background-color: aqua; */
 }
 .cadre_quiz {
   margin-top: 40px;
@@ -171,11 +170,10 @@ span {
   transition: 0.2s all ease-in-out;
   cursor: pointer;
   height: 30px;
-  margin-bottom: 15px ;
+  margin-bottom: 15px;
 }
 .suivant:hover {
   background-color: rgb(110, 104, 229);
-  
 }
 .suivant:disabled {
   background: #999;
@@ -183,3 +181,11 @@ span {
   opacity: 0.6;
 }
 
+.orange {
+  background: orange;
+  transition: all 0.3s ease-in-out;
+}
+.red {
+  background: red;
+  transition: all 0.3s ease-in-out;
+}

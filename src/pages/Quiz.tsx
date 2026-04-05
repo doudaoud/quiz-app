@@ -1,9 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 type Question = {
-  [key: number]: object;
+  question: string;
+  proposition: string[];
+  reponse: string;
 };
-const question: Question  = {
+type reponse = {
+  [key: number | string]: string;
+};
+
+const questionn: Record<number, Question> = {
   1: {
     question: "Quelle est la capitale de l’Algérie ?",
     proposition: ["Annaba", "Alger", "Setif", "Oran"],
@@ -57,28 +63,52 @@ const question: Question  = {
 };
 export default function Quiz() {
   const [time, setTime] = React.useState<number>(60);
+  const [i, setI] = React.useState<number | null>();
   const [value, setValue] = React.useState<number>(100);
   const [progression, setProgression] = React.useState<number>(10);
-  const radioRef = React.useRef<HTMLInputElement>(null);
-  const [response , setResponse ] = React.useState<object>([])
-
+  const [response, setResponse] = React.useState<reponse>(
+    [] as unknown as reponse,
+  );
+  const [dejaAfficher, setDejaAfficher] = React.useState<number[]>([]);
+  const didInit = React.useRef(false);
   const navigate = useNavigate();
+
+  const keys = React.useMemo(() => {
+    return Object.keys(questionn);
+  }, []);
+
+  const onClicked = (): void => {
+    if (dejaAfficher.length === keys.length) {
+      navigate("/result");
+    }
+
+    let randomIndex;
+
+    do {
+      randomIndex = Math.floor(Math.random() * keys.length);
+    } while (dejaAfficher.includes(randomIndex));
+
+    setDejaAfficher((prev) => [...prev, randomIndex]);
+    setI(randomIndex + 1);
+  };
+
   React.useEffect(() => {
     const interval = setInterval(() => {
       if (time > 0) {
         setTime(time - 1);
         setValue(value - 1.7);
       } else {
-        // alert("Temps écoulé !");
-        // window.location.reload();
-        window.location.reload();
         clearInterval(interval);
         navigate("/result");
       }
-
     }, 1000);
     return () => clearInterval(interval);
   }, [time]);
+  React.useEffect(() => {
+    if (didInit.current) return;
+    didInit.current = true;
+    onClicked();
+  }, []);
   return (
     <React.Fragment>
       <div className="container_quiz">
@@ -89,17 +119,20 @@ export default function Quiz() {
           }}
           className="progress"
         >
-          <div className="progress-fill" style={{ width: `${value}%` }} />
+          {/* {question[1].question} */}
+          <div className={time<= 30 && time > 10 ? " progress-fill orange " : time <= 10 ? "progress-fill red" : "progress-fill" }  style={{ width: `${value}%` }} />
         </div>
         <p className="temps_restant">Temps restant</p>
 
-        <p className="question_num">Question sur 10</p>
+        <p className="question_num">Question {dejaAfficher.length} sur 10</p>
         <div className="progress">
           <div className="progress-fill" style={{ width: `${progression}%` }} />
         </div>
         <div className="cadre_quiz">
-          <h2 className="qustion">Quel est le plus grand océan du monde ?</h2>
-          <p className="num_question">Question 1 sur 10</p>
+          <h2 className="qustion">
+            {i === null || i === undefined ? "" : `${questionn[i].question} `}
+          </h2>
+          <p className="num_question">Question {dejaAfficher.length} sur 10</p>
           <div className="reponses">
             <label className="carte">
               <input
@@ -109,7 +142,11 @@ export default function Quiz() {
                 title="question 1"
                 className="radio"
               />
-              <span>question 1 </span>
+              <span>
+                {i === null || i === undefined
+                  ? ""
+                  : `${questionn[i].proposition[0]} `}{" "}
+              </span>
             </label>
             <label className="carte">
               <input
@@ -119,8 +156,12 @@ export default function Quiz() {
                 title="question 1"
                 className="radio"
               />
-              <span>question 1 </span>
-            </label>{" "}
+              <span>
+                {i === null || i === undefined
+                  ? ""
+                  : `${questionn[i].proposition[1]}`}{" "}
+              </span>
+            </label>
             <label className="carte">
               <input
                 type="radio"
@@ -129,8 +170,12 @@ export default function Quiz() {
                 title="question 1"
                 className="radio"
               />
-              <span>question 1 </span>
-            </label>{" "}
+              <span>
+                {i === null || i === undefined
+                  ? ""
+                  : `${questionn[i].proposition[2]} `}{" "}
+              </span>
+            </label>
             <label className="carte">
               <input
                 type="radio"
@@ -139,7 +184,11 @@ export default function Quiz() {
                 title="question 1"
                 className="radio"
               />
-              <span>question 1 </span>
+              <span>
+                {i === null || i === undefined
+                  ? ""
+                  : `${questionn[i].proposition[3]}`}
+              </span>
             </label>
             <button className="suivant" disabled>
               Suivant
