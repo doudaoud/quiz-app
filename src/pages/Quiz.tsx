@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 type Question = {
   question: string;
@@ -69,6 +69,16 @@ export default function Quiz() {
   const [response, setResponse] = React.useState<reponse>(
     [] as unknown as reponse,
   );
+  const [selected, setSelected] = React.useState<string>("");
+  const onchangeSelect = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelected(event.target.value);
+  };
+  const onchange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setResponse((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
   const [dejaAfficher, setDejaAfficher] = React.useState<number[]>([]);
   const didInit = React.useRef(false);
   const navigate = useNavigate();
@@ -80,6 +90,7 @@ export default function Quiz() {
   const onClicked = (): void => {
     if (dejaAfficher.length === keys.length) {
       navigate("/result");
+      return;
     }
 
     let randomIndex;
@@ -90,6 +101,7 @@ export default function Quiz() {
 
     setDejaAfficher((prev) => [...prev, randomIndex]);
     setI(randomIndex + 1);
+    setSelected("");
   };
 
   React.useEffect(() => {
@@ -120,7 +132,16 @@ export default function Quiz() {
           className="progress"
         >
           {/* {question[1].question} */}
-          <div className={time<= 30 && time > 10 ? " progress-fill orange " : time <= 10 ? "progress-fill red" : "progress-fill" }  style={{ width: `${value}%` }} />
+          <div
+            className={
+              time <= 30 && time > 10
+                ? " progress-fill orange "
+                : time <= 10
+                  ? "progress-fill red"
+                  : "progress-fill"
+            }
+            style={{ width: `${value}%` }}
+          />
         </div>
         <p className="temps_restant">Temps restant</p>
 
@@ -134,63 +155,25 @@ export default function Quiz() {
           </h2>
           <p className="num_question">Question {dejaAfficher.length} sur 10</p>
           <div className="reponses">
-            <label className="carte">
-              <input
-                type="radio"
-                name="res"
-                id="1"
-                title="question 1"
-                className="radio"
-              />
-              <span>
-                {i === null || i === undefined
-                  ? ""
-                  : `${questionn[i].proposition[0]} `}{" "}
-              </span>
-            </label>
-            <label className="carte">
-              <input
-                type="radio"
-                name="res"
-                id="2"
-                title="question 1"
-                className="radio"
-              />
-              <span>
-                {i === null || i === undefined
-                  ? ""
-                  : `${questionn[i].proposition[1]}`}{" "}
-              </span>
-            </label>
-            <label className="carte">
-              <input
-                type="radio"
-                name="res"
-                id="3"
-                title="question 1"
-                className="radio"
-              />
-              <span>
-                {i === null || i === undefined
-                  ? ""
-                  : `${questionn[i].proposition[2]} `}{" "}
-              </span>
-            </label>
-            <label className="carte">
-              <input
-                type="radio"
-                name="res"
-                id="4"
-                title="question 1"
-                className="radio"
-              />
-              <span>
-                {i === null || i === undefined
-                  ? ""
-                  : `${questionn[i].proposition[3]}`}
-              </span>
-            </label>
-            <button className="suivant" disabled>
+            {(i === null || i === undefined
+              ? []
+              : questionn[i].proposition
+            ).map((proposition) => (
+              <label className="carte" key={proposition}>
+                <input
+                  type="radio"
+                  name="res"
+                  id={i !== null && i !== undefined ? i.toString() : "1"}
+                  title="question 1"
+                  className="radio"
+                  value={proposition}
+                  onChange={onchangeSelect}
+                  checked={selected === proposition}
+                />
+                <span>{proposition}</span>
+              </label>
+            ))}
+            <button className="suivant" disabled = {selected === "" ? true : false}  >
               Suivant
             </button>
           </div>

@@ -9,7 +9,7 @@ export default function Home() {
   const handleButtonClick = useCallback(() => {
     navigate("/quiz");
   }, [navigate]);
-
+  
   return (
     <div className="container">
       <h1 className="title">Quiz Master</h1>
