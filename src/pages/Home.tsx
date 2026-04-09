@@ -2,10 +2,12 @@ import { useCallback } from "react";
 import { useNavigate, type NavigateFunction } from "react-router-dom";
 import TextType from "../TypeText/TypeText";
 import "../App.css";
+import React from "react";
+
 
 export default function Home() {
   const navigate: NavigateFunction = useNavigate();
-
+ 
   const handleButtonClick = useCallback(() => {
     navigate("/quiz");
   }, [navigate]);

@@ -1,13 +1,16 @@
 import React, { type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { responseContext } from "../context/responseContsxt";
+
+type reponse = {
+  [key: number | string]: string;
+};
 type Question = {
   question: string;
   proposition: string[];
   reponse: string;
 };
-type reponse = {
-  [key: number | string]: string;
-};
+
 
 const questionn: Record<number, Question> = {
   1: {
@@ -66,19 +69,12 @@ export default function Quiz() {
   const [i, setI] = React.useState<number | null>();
   const [value, setValue] = React.useState<number>(100);
   const [progression, setProgression] = React.useState<number>(10);
-  const [response, setResponse] = React.useState<reponse>(
-    [] as unknown as reponse,
-  );
+  const { response ,  setResponse} = React.useContext(responseContext);
   const [selected, setSelected] = React.useState<string>("");
   const onchangeSelect = (event: ChangeEvent<HTMLInputElement>) => {
     setSelected(event.target.value);
   };
-  const onchange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setResponse((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  };
+
   const [dejaAfficher, setDejaAfficher] = React.useState<number[]>([]);
   const didInit = React.useRef(false);
   const navigate = useNavigate();
@@ -90,6 +86,7 @@ export default function Quiz() {
   const onClicked = (): void => {
     if (dejaAfficher.length === keys.length) {
       navigate("/result");
+      console.log(response)
       return;
     }
 
@@ -173,7 +170,20 @@ export default function Quiz() {
                 <span>{proposition}</span>
               </label>
             ))}
-            <button className="suivant" disabled = {selected === "" ? true : false}  >
+            <button
+              className="suivant"
+              disabled={selected === "" ? true : false}
+              onClick={() => {
+                if (i !== null && i !== undefined) {
+                  setResponse((prev:reponse) => ({
+                    ...prev,
+                    [i]: selected,
+                  }) );
+                }
+                setProgression((prev) => prev + 10);
+                onClicked();
+              }}
+            >
               Suivant
             </button>
           </div>
