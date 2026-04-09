@@ -4,20 +4,17 @@ import { Routes, Route } from "react-router-dom";
 import Quiz from "./pages/Quiz";
 import Result from "./pages/Result";
 import Home from "./pages/Home";
-import { responseContext } from "./context/responseContsxt";
-type reponse = {
-  [key: number | string]: string;
-};
+import { responseContext, type Reponse } from "./context/responseContsxt";
+
 export default function App(): React.ReactElement {
-  const [response, setResponse] = React.useState<reponse>(
-    [] as unknown as reponse,
-  );
+  const [response, setResponse] = React.useState<Reponse>({});
+  const [quizDuration, setQuizDuration] = React.useState<number>(0);
 
   return (
-    <responseContext.Provider value={{ response, setResponse }}>
+    <responseContext.Provider
+      value={{ quizDuration, response, setQuizDuration, setResponse }}
+    >
       <React.Fragment>
-        {/* routes */}
-
         <Routes>
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/result" element={<Result />} />

@@ -189,3 +189,155 @@ span {
   background: red;
   transition: all 0.3s ease-in-out;
 }
+
+.result-page {
+  min-height: 100vh;
+  padding: 36px 16px;
+  background: #ffffff;
+}
+
+.result-layout {
+  width: min(100%, 450px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.result-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #18181b;
+}
+
+.result-description {
+  margin: 16px 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #66708a;
+}
+
+.result-score-card {
+  width: 100%;
+  padding: 32px 24px;
+  border: 1px solid #deddee;
+  border-radius: 14px;
+  background: #f6f5ff;
+  text-align: center;
+}
+
+.result-score-label {
+  margin: 0 0 12px;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.result-score-percent {
+  margin: 0;
+  font-size: clamp(4rem, 10vw, 5.25rem);
+  line-height: 1;
+  font-weight: 900;
+  color: #4f46e5;
+}
+
+.result-score-text {
+  margin: 14px 0 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #18181b;
+}
+
+.result-stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.result-stat-card {
+  min-height: 104px;
+  padding: 18px 12px;
+  border: 1px solid #dfdfea;
+  border-radius: 14px;
+  background: #ffffff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.result-stat-label {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  color: #66708a;
+}
+
+.result-stat-value {
+  font-size: 1.95rem;
+  font-weight: 800;
+  color: #18181b;
+}
+
+.result-stat-value-wrong {
+  color: #ff1e1e;
+}
+
+.result-replay-button {
+  width: 100%;
+  margin-top: 32px;
+  height: 48px;
+  border: none;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.result-replay-button:hover {
+  background: #5d55e7;
+  transform: translateY(-1px);
+}
+
+.result-footer-text {
+  margin: 28px 0 0;
+  max-width: 420px;
+  text-align: center;
+  color: #66708a;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 520px) {
+  .result-page {
+    padding: 28px 14px;
+  }
+
+  .result-stats {
+    gap: 12px;
+  }
+
+  .result-stat-card {
+    min-height: 96px;
+    padding: 16px 10px;
+  }
+
+  .result-stat-label {
+    font-size: 0.85rem;
+  }
+
+  .result-stat-value {
+    font-size: 1.7rem;
+  }
+}
